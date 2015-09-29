@@ -1,0 +1,1515 @@
+doing
+2
+ 
+
+
+Algorithm's computational part duration : 92387
+
+
+Algorithm's computational part duration : 71533
+
+
+Algorithm's computational part duration : 72727
+
+
+Algorithm's computational part duration : 85462
+
+
+Algorithm's computational part duration : 148010
+
+
+Algorithm's computational part duration : 100875
+
+
+Algorithm's computational part duration : 106511
+
+
+Algorithm's computational part duration : 90204
+
+
+Algorithm's computational part duration : 84663
+
+
+Algorithm's computational part duration : 81556
+
+
+Algorithm's computational part duration : 94706
+
+
+Algorithm's computational part duration : 85782
+
+
+Algorithm's computational part duration : 85275
+
+
+Algorithm's computational part duration : 85498
+
+
+Algorithm's computational part duration : 85826
+
+
+Algorithm's computational part duration : 82035
+
+
+Algorithm's computational part duration : 87400
+
+
+Algorithm's computational part duration : 83326
+
+
+Algorithm's computational part duration : 86259
+
+
+Algorithm's computational part duration : 89028
+
+
+Algorithm's computational part duration : 85899
+
+
+Algorithm's computational part duration : 82337
+
+
+Algorithm's computational part duration : 86984
+
+
+Algorithm's computational part duration : 89561
+
+
+Algorithm's computational part duration : 81683
+
+
+Algorithm's computational part duration : 82995
+
+
+Algorithm's computational part duration : 95814
+
+
+Algorithm's computational part duration : 79678
+
+
+Algorithm's computational part duration : 85018
+
+
+Algorithm's computational part duration : 85986
+
+
+Algorithm's computational part duration : 106232
+
+
+Algorithm's computational part duration : 108154
+
+
+Algorithm's computational part duration : 88741
+
+
+Algorithm's computational part duration : 106633
+
+
+Algorithm's computational part duration : 84751
+
+
+Algorithm's computational part duration : 88666
+
+
+Algorithm's computational part duration : 88409
+
+
+Algorithm's computational part duration : 87494
+
+
+Algorithm's computational part duration : 84858
+
+
+Algorithm's computational part duration : 99147
+
+
+Algorithm's computational part duration : 88917
+
+
+Algorithm's computational part duration : 88352
+
+
+Algorithm's computational part duration : 101668
+
+
+Algorithm's computational part duration : 107303
+
+
+Algorithm's computational part duration : 72544
+
+
+Algorithm's computational part duration : 74437
+
+
+Algorithm's computational part duration : 71712
+
+
+Algorithm's computational part duration : 74004
+
+
+Algorithm's computational part duration : 72405
+
+
+Algorithm's computational part duration : 78555
+
+
+Algorithm's computational part duration : 75934
+
+
+Algorithm's computational part duration : 73812
+
+
+Algorithm's computational part duration : 75336
+
+
+Algorithm's computational part duration : 76477
+
+
+Algorithm's computational part duration : 72359
+
+
+Algorithm's computational part duration : 70740
+
+
+Algorithm's computational part duration : 70825
+
+
+Algorithm's computational part duration : 75840
+
+
+Algorithm's computational part duration : 72755
+
+
+Algorithm's computational part duration : 74158
+
+
+Algorithm's computational part duration : 72672
+
+
+Algorithm's computational part duration : 73386
+
+
+Algorithm's computational part duration : 70689
+
+
+Algorithm's computational part duration : 71803
+
+
+Algorithm's computational part duration : 71013
+
+
+Algorithm's computational part duration : 72734
+
+
+Algorithm's computational part duration : 72923
+
+
+Algorithm's computational part duration : 72478
+
+
+Algorithm's computational part duration : 69797
+
+
+Algorithm's computational part duration : 75256
+
+
+Algorithm's computational part duration : 74231
+
+
+Algorithm's computational part duration : 70473
+
+
+Algorithm's computational part duration : 71168
+
+
+Algorithm's computational part duration : 72084
+
+
+Algorithm's computational part duration : 70666
+
+
+Algorithm's computational part duration : 72596
+
+
+Algorithm's computational part duration : 71031
+
+
+Algorithm's computational part duration : 75862
+
+
+Algorithm's computational part duration : 71196
+
+
+Algorithm's computational part duration : 70870
+
+
+Algorithm's computational part duration : 70395
+
+
+Algorithm's computational part duration : 72450
+
+
+Algorithm's computational part duration : 72589
+
+
+Algorithm's computational part duration : 71474
+
+
+Algorithm's computational part duration : 77286
+
+
+Algorithm's computational part duration : 76820
+
+
+Algorithm's computational part duration : 73122
+
+
+Algorithm's computational part duration : 73894
+
+
+Algorithm's computational part duration : 71578
+
+
+Algorithm's computational part duration : 71359
+
+
+Algorithm's computational part duration : 70093
+
+
+Algorithm's computational part duration : 70263
+
+
+Algorithm's computational part duration : 72733
+
+
+Algorithm's computational part duration : 74669
+
+
+Algorithm's computational part duration : 72648
+
+
+Algorithm's computational part duration : 70449
+
+
+Algorithm's computational part duration : 74266
+
+
+Algorithm's computational part duration : 71805
+
+
+Algorithm's computational part duration : 71540
+
+
+Algorithm's computational part duration : 69711
+doing
+4
+ 
+
+
+Algorithm's computational part duration : 64573
+
+
+Algorithm's computational part duration : 68289
+
+
+Algorithm's computational part duration : 64601
+
+
+Algorithm's computational part duration : 67699
+
+
+Algorithm's computational part duration : 64951
+
+
+Algorithm's computational part duration : 64193
+
+
+Algorithm's computational part duration : 64046
+
+
+Algorithm's computational part duration : 66494
+
+
+Algorithm's computational part duration : 63843
+
+
+Algorithm's computational part duration : 64845
+
+
+Algorithm's computational part duration : 66406
+
+
+Algorithm's computational part duration : 64113
+
+
+Algorithm's computational part duration : 65569
+
+
+Algorithm's computational part duration : 63934
+
+
+Algorithm's computational part duration : 66214
+
+
+Algorithm's computational part duration : 64963
+
+
+Algorithm's computational part duration : 65934
+
+
+Algorithm's computational part duration : 65011
+
+
+Algorithm's computational part duration : 65827
+
+
+Algorithm's computational part duration : 64087
+
+
+Algorithm's computational part duration : 63975
+
+
+Algorithm's computational part duration : 65808
+
+
+Algorithm's computational part duration : 64351
+
+
+Algorithm's computational part duration : 65398
+
+
+Algorithm's computational part duration : 64093
+
+
+Algorithm's computational part duration : 64655
+
+
+Algorithm's computational part duration : 65989
+
+
+Algorithm's computational part duration : 65093
+
+
+Algorithm's computational part duration : 67456
+
+
+Algorithm's computational part duration : 65055
+
+
+Algorithm's computational part duration : 65275
+
+
+Algorithm's computational part duration : 65793
+
+
+Algorithm's computational part duration : 66460
+
+
+Algorithm's computational part duration : 64651
+
+
+Algorithm's computational part duration : 65683
+
+
+Algorithm's computational part duration : 65283
+
+
+Algorithm's computational part duration : 64348
+
+
+Algorithm's computational part duration : 64794
+
+
+Algorithm's computational part duration : 64488
+
+
+Algorithm's computational part duration : 65383
+
+
+Algorithm's computational part duration : 64107
+
+
+Algorithm's computational part duration : 67939
+
+
+Algorithm's computational part duration : 64984
+
+
+Algorithm's computational part duration : 64488
+
+
+Algorithm's computational part duration : 66556
+
+
+Algorithm's computational part duration : 64889
+
+
+Algorithm's computational part duration : 63666
+
+
+Algorithm's computational part duration : 64204
+
+
+Algorithm's computational part duration : 65475
+
+
+Algorithm's computational part duration : 64234
+
+
+Algorithm's computational part duration : 63813
+
+
+Algorithm's computational part duration : 64699
+
+
+Algorithm's computational part duration : 65362
+
+
+Algorithm's computational part duration : 64327
+
+
+Algorithm's computational part duration : 64319
+
+
+Algorithm's computational part duration : 64435
+
+
+Algorithm's computational part duration : 64402
+
+
+Algorithm's computational part duration : 64487
+
+
+Algorithm's computational part duration : 64519
+
+
+Algorithm's computational part duration : 65094
+
+
+Algorithm's computational part duration : 65124
+
+
+Algorithm's computational part duration : 64450
+
+
+Algorithm's computational part duration : 68320
+
+
+Algorithm's computational part duration : 69255
+
+
+Algorithm's computational part duration : 71354
+
+
+Algorithm's computational part duration : 66871
+
+
+Algorithm's computational part duration : 64264
+
+
+Algorithm's computational part duration : 64244
+
+
+Algorithm's computational part duration : 66625
+
+
+Algorithm's computational part duration : 66291
+
+
+Algorithm's computational part duration : 66568
+
+
+Algorithm's computational part duration : 70137
+
+
+Algorithm's computational part duration : 65641
+
+
+Algorithm's computational part duration : 74678
+
+
+Algorithm's computational part duration : 71465
+
+
+Algorithm's computational part duration : 87924
+
+
+Algorithm's computational part duration : 85698
+
+
+Algorithm's computational part duration : 70243
+
+
+Algorithm's computational part duration : 67424
+
+
+Algorithm's computational part duration : 71344
+
+
+Algorithm's computational part duration : 64604
+
+
+Algorithm's computational part duration : 112706
+
+
+Algorithm's computational part duration : 76890
+
+
+Algorithm's computational part duration : 76190
+
+
+Algorithm's computational part duration : 66177
+
+
+Algorithm's computational part duration : 70893
+
+
+Algorithm's computational part duration : 71931
+
+
+Algorithm's computational part duration : 68920
+
+
+Algorithm's computational part duration : 64858
+
+
+Algorithm's computational part duration : 78144
+
+
+Algorithm's computational part duration : 79383
+
+
+Algorithm's computational part duration : 76366
+
+
+Algorithm's computational part duration : 85622
+
+
+Algorithm's computational part duration : 72421
+
+
+Algorithm's computational part duration : 75818
+
+
+Algorithm's computational part duration : 77971
+
+
+Algorithm's computational part duration : 78264
+
+
+Algorithm's computational part duration : 77425
+
+
+Algorithm's computational part duration : 84993
+
+
+Algorithm's computational part duration : 81154
+doing
+8
+ 
+
+
+Algorithm's computational part duration : 73097
+
+
+Algorithm's computational part duration : 80198
+
+
+Algorithm's computational part duration : 62514
+
+
+Algorithm's computational part duration : 63322
+
+
+Algorithm's computational part duration : 65598
+
+
+Algorithm's computational part duration : 86088
+
+
+Algorithm's computational part duration : 77620
+
+
+Algorithm's computational part duration : 76243
+
+
+Algorithm's computational part duration : 79997
+
+
+Algorithm's computational part duration : 63634
+
+
+Algorithm's computational part duration : 65090
+
+
+Algorithm's computational part duration : 86488
+
+
+Algorithm's computational part duration : 78511
+
+
+Algorithm's computational part duration : 63282
+
+
+Algorithm's computational part duration : 63874
+
+
+Algorithm's computational part duration : 63813
+
+
+Algorithm's computational part duration : 68834
+
+
+Algorithm's computational part duration : 69912
+
+
+Algorithm's computational part duration : 64117
+
+
+Algorithm's computational part duration : 66740
+
+
+Algorithm's computational part duration : 64385
+
+
+Algorithm's computational part duration : 68419
+
+
+Algorithm's computational part duration : 64692
+
+
+Algorithm's computational part duration : 63416
+
+
+Algorithm's computational part duration : 63115
+
+
+Algorithm's computational part duration : 65344
+
+
+Algorithm's computational part duration : 64691
+
+
+Algorithm's computational part duration : 62822
+
+
+Algorithm's computational part duration : 78868
+
+
+Algorithm's computational part duration : 81679
+
+
+Algorithm's computational part duration : 79166
+
+
+Algorithm's computational part duration : 73471
+
+
+Algorithm's computational part duration : 72781
+
+
+Algorithm's computational part duration : 71381
+
+
+Algorithm's computational part duration : 82514
+
+
+Algorithm's computational part duration : 63864
+
+
+Algorithm's computational part duration : 64880
+
+
+Algorithm's computational part duration : 86968
+
+
+Algorithm's computational part duration : 63807
+
+
+Algorithm's computational part duration : 65018
+
+
+Algorithm's computational part duration : 63618
+
+
+Algorithm's computational part duration : 63509
+
+
+Algorithm's computational part duration : 81540
+
+
+Algorithm's computational part duration : 83498
+
+
+Algorithm's computational part duration : 63083
+
+
+Algorithm's computational part duration : 64554
+
+
+Algorithm's computational part duration : 70683
+
+
+Algorithm's computational part duration : 76455
+
+
+Algorithm's computational part duration : 76940
+
+
+Algorithm's computational part duration : 68987
+
+
+Algorithm's computational part duration : 87010
+
+
+Algorithm's computational part duration : 75692
+
+
+Algorithm's computational part duration : 78439
+
+
+Algorithm's computational part duration : 94383
+
+
+Algorithm's computational part duration : 71683
+
+
+Algorithm's computational part duration : 86431
+
+
+Algorithm's computational part duration : 75622
+
+
+Algorithm's computational part duration : 74375
+
+
+Algorithm's computational part duration : 74795
+
+
+Algorithm's computational part duration : 75587
+
+
+Algorithm's computational part duration : 81115
+
+
+Algorithm's computational part duration : 81369
+
+
+Algorithm's computational part duration : 71064
+
+
+Algorithm's computational part duration : 75794
+
+
+Algorithm's computational part duration : 71954
+
+
+Algorithm's computational part duration : 75287
+
+
+Algorithm's computational part duration : 90944
+
+
+Algorithm's computational part duration : 76816
+
+
+Algorithm's computational part duration : 80127
+
+
+Algorithm's computational part duration : 72281
+
+
+Algorithm's computational part duration : 75810
+
+
+Algorithm's computational part duration : 75714
+
+
+Algorithm's computational part duration : 92031
+
+
+Algorithm's computational part duration : 65769
+
+
+Algorithm's computational part duration : 78345
+
+
+Algorithm's computational part duration : 76157
+
+
+Algorithm's computational part duration : 73991
+
+
+Algorithm's computational part duration : 65460
+
+
+Algorithm's computational part duration : 104667
+
+
+Algorithm's computational part duration : 71495
+
+
+Algorithm's computational part duration : 80388
+
+
+Algorithm's computational part duration : 72013
+
+
+Algorithm's computational part duration : 85742
+
+
+Algorithm's computational part duration : 74611
+
+
+Algorithm's computational part duration : 79871
+
+
+Algorithm's computational part duration : 62951
+
+
+Algorithm's computational part duration : 74454
+
+
+Algorithm's computational part duration : 64572
+
+
+Algorithm's computational part duration : 66787
+
+
+Algorithm's computational part duration : 76220
+
+
+Algorithm's computational part duration : 70165
+
+
+Algorithm's computational part duration : 92526
+
+
+Algorithm's computational part duration : 64893
+
+
+Algorithm's computational part duration : 88004
+
+
+Algorithm's computational part duration : 71569
+
+
+Algorithm's computational part duration : 70859
+
+
+Algorithm's computational part duration : 96077
+
+
+Algorithm's computational part duration : 70322
+
+
+Algorithm's computational part duration : 65169
+
+
+Algorithm's computational part duration : 72782
+doing
+16
+ 
+
+
+Algorithm's computational part duration : 64120
+
+
+Algorithm's computational part duration : 76497
+
+
+Algorithm's computational part duration : 64166
+
+
+Algorithm's computational part duration : 63556
+
+
+Algorithm's computational part duration : 63558
+
+
+Algorithm's computational part duration : 63265
+
+
+Algorithm's computational part duration : 78498
+
+
+Algorithm's computational part duration : 117566
+
+
+Algorithm's computational part duration : 76079
+
+
+Algorithm's computational part duration : 72904
+
+
+Algorithm's computational part duration : 63698
+
+
+Algorithm's computational part duration : 65214
+
+
+Algorithm's computational part duration : 63253
+
+
+Algorithm's computational part duration : 63393
+
+
+Algorithm's computational part duration : 64605
+
+
+Algorithm's computational part duration : 63757
+
+
+Algorithm's computational part duration : 68253
+
+
+Algorithm's computational part duration : 86472
+
+
+Algorithm's computational part duration : 64173
+
+
+Algorithm's computational part duration : 65638
+
+
+Algorithm's computational part duration : 64729
+
+
+Algorithm's computational part duration : 65961
+
+
+Algorithm's computational part duration : 63144
+
+
+Algorithm's computational part duration : 66544
+
+
+Algorithm's computational part duration : 63857
+
+
+Algorithm's computational part duration : 66918
+
+
+Algorithm's computational part duration : 65190
+
+
+Algorithm's computational part duration : 66100
+
+
+Algorithm's computational part duration : 84359
+
+
+Algorithm's computational part duration : 65872
+
+
+Algorithm's computational part duration : 63243
+
+
+Algorithm's computational part duration : 64456
+
+
+Algorithm's computational part duration : 66262
+
+
+Algorithm's computational part duration : 66517
+
+
+Algorithm's computational part duration : 64801
+
+
+Algorithm's computational part duration : 63338
+
+
+Algorithm's computational part duration : 63621
+
+
+Algorithm's computational part duration : 62697
+
+
+Algorithm's computational part duration : 64076
+
+
+Algorithm's computational part duration : 71048
+
+
+Algorithm's computational part duration : 72358
+
+
+Algorithm's computational part duration : 75452
+
+
+Algorithm's computational part duration : 73446
+
+
+Algorithm's computational part duration : 73940
+
+
+Algorithm's computational part duration : 73384
+
+
+Algorithm's computational part duration : 72567
+
+
+Algorithm's computational part duration : 80679
+
+
+Algorithm's computational part duration : 72859
+
+
+Algorithm's computational part duration : 78086
+
+
+Algorithm's computational part duration : 81304
+
+
+Algorithm's computational part duration : 76604
+
+
+Algorithm's computational part duration : 74218
+
+
+Algorithm's computational part duration : 65064
+
+
+Algorithm's computational part duration : 89188
+
+
+Algorithm's computational part duration : 63828
+
+
+Algorithm's computational part duration : 79611
+
+
+Algorithm's computational part duration : 76005
+
+
+Algorithm's computational part duration : 77669
+
+
+Algorithm's computational part duration : 64400
+
+
+Algorithm's computational part duration : 83613
+
+
+Algorithm's computational part duration : 71455
+
+
+Algorithm's computational part duration : 91400
+
+
+Algorithm's computational part duration : 72746
+
+
+Algorithm's computational part duration : 78975
+
+
+Algorithm's computational part duration : 75376
+
+
+Algorithm's computational part duration : 72761
+
+
+Algorithm's computational part duration : 79913
+
+
+Algorithm's computational part duration : 69420
+
+
+Algorithm's computational part duration : 67193
+
+
+Algorithm's computational part duration : 63863
+
+
+Algorithm's computational part duration : 79147
+
+
+Algorithm's computational part duration : 63794
+
+
+Algorithm's computational part duration : 64629
+
+
+Algorithm's computational part duration : 72833
+
+
+Algorithm's computational part duration : 77351
+
+
+Algorithm's computational part duration : 76744
+
+
+Algorithm's computational part duration : 77596
+
+
+Algorithm's computational part duration : 78392
+
+
+Algorithm's computational part duration : 77442
+
+
+Algorithm's computational part duration : 63656
+
+
+Algorithm's computational part duration : 68672
+
+
+Algorithm's computational part duration : 82624
+
+
+Algorithm's computational part duration : 92074
+
+
+Algorithm's computational part duration : 78475
+
+
+Algorithm's computational part duration : 78244
+
+
+Algorithm's computational part duration : 73956
+
+
+Algorithm's computational part duration : 75598
+
+
+Algorithm's computational part duration : 77400
+
+
+Algorithm's computational part duration : 77095
+
+
+Algorithm's computational part duration : 81621
+
+
+Algorithm's computational part duration : 87623
+
+
+Algorithm's computational part duration : 77275
+
+
+Algorithm's computational part duration : 73071
+
+
+Algorithm's computational part duration : 72891
+
+
+Algorithm's computational part duration : 71463
+
+
+Algorithm's computational part duration : 70731
+
+
+Algorithm's computational part duration : 78079
+
+
+Algorithm's computational part duration : 78619
+
+
+Algorithm's computational part duration : 79123
+
+
+Algorithm's computational part duration : 72687
+doing
+32
+ 
+
+
+Algorithm's computational part duration : 68976
+
+
+Algorithm's computational part duration : 72763
+
+
+Algorithm's computational part duration : 62867
+
+
+Algorithm's computational part duration : 63490
+
+
+Algorithm's computational part duration : 62873
+
+
+Algorithm's computational part duration : 63856
+
+
+Algorithm's computational part duration : 63692
+
+
+Algorithm's computational part duration : 63323
+
+
+Algorithm's computational part duration : 63295
+
+
+Algorithm's computational part duration : 63890
+
+
+Algorithm's computational part duration : 63071
+
+
+Algorithm's computational part duration : 63071
+
+
+Algorithm's computational part duration : 63743
+
+
+Algorithm's computational part duration : 64506
+
+
+Algorithm's computational part duration : 64333
+
+
+Algorithm's computational part duration : 64212
+
+
+Algorithm's computational part duration : 63991
+
+
+Algorithm's computational part duration : 63587
+
+
+Algorithm's computational part duration : 63707
+
+
+Algorithm's computational part duration : 63967
+
+
+Algorithm's computational part duration : 62965
+
+
+Algorithm's computational part duration : 63645
+
+
+Algorithm's computational part duration : 63169
+
+
+Algorithm's computational part duration : 63329
+
+
+Algorithm's computational part duration : 63132
+
+
+Algorithm's computational part duration : 63256
+
+
+Algorithm's computational part duration : 63142
+
+
+Algorithm's computational part duration : 63498
+
+
+Algorithm's computational part duration : 64358
+
+
+Algorithm's computational part duration : 63582
+
+
+Algorithm's computational part duration : 64031
+
+
+Algorithm's computational part duration : 64622
+
+
+Algorithm's computational part duration : 63079
+
+
+Algorithm's computational part duration : 63193
+
+
+Algorithm's computational part duration : 64288
+
+
+Algorithm's computational part duration : 63126
+
+
+Algorithm's computational part duration : 62987
+
+
+Algorithm's computational part duration : 64349
+
+
+Algorithm's computational part duration : 63434
+
+
+Algorithm's computational part duration : 62543
+
+
+Algorithm's computational part duration : 63105
+
+
+Algorithm's computational part duration : 63013
+
+
+Algorithm's computational part duration : 64240
+
+
+Algorithm's computational part duration : 63906
+
+
+Algorithm's computational part duration : 63401
+
+
+Algorithm's computational part duration : 63274
+
+
+Algorithm's computational part duration : 63597
+
+
+Algorithm's computational part duration : 63030
+
+
+Algorithm's computational part duration : 64934
+
+
+Algorithm's computational part duration : 63734
+
+
+Algorithm's computational part duration : 63069
+
+
+Algorithm's computational part duration : 63378
+
+
+Algorithm's computational part duration : 63217
+
+
+Algorithm's computational part duration : 63452
+
+
+Algorithm's computational part duration : 63783
+
+
+Algorithm's computational part duration : 64464
+
+
+Algorithm's computational part duration : 62717
+
+
+Algorithm's computational part duration : 63505
+
+
+Algorithm's computational part duration : 65424
+
+
+Algorithm's computational part duration : 63225
+
+
+Algorithm's computational part duration : 63620
+
+
+Algorithm's computational part duration : 63739
+
+
+Algorithm's computational part duration : 63050
+
+
+Algorithm's computational part duration : 63417
+
+
+Algorithm's computational part duration : 64360
+
+
+Algorithm's computational part duration : 63910
+
+
+Algorithm's computational part duration : 63559
+
+
+Algorithm's computational part duration : 63072
+
+
+Algorithm's computational part duration : 64090
+
+
+Algorithm's computational part duration : 63448
+
+
+Algorithm's computational part duration : 63050
+
+
+Algorithm's computational part duration : 63177
+
+
+Algorithm's computational part duration : 63036
+
+
+Algorithm's computational part duration : 68274
+
+
+Algorithm's computational part duration : 84946
+
+
+Algorithm's computational part duration : 68691
+
+
+Algorithm's computational part duration : 62701
+
+
+Algorithm's computational part duration : 65984
+
+
+Algorithm's computational part duration : 70421
+
+
+Algorithm's computational part duration : 83348
+
+
+Algorithm's computational part duration : 77903
+
+
+Algorithm's computational part duration : 76003
+
+
+Algorithm's computational part duration : 77932
+
+
+Algorithm's computational part duration : 74833
+
+
+Algorithm's computational part duration : 81833
+
+
+Algorithm's computational part duration : 73808
+
+
+Algorithm's computational part duration : 71394
+
+
+Algorithm's computational part duration : 75760
+
+
+Algorithm's computational part duration : 77286
+
+
+Algorithm's computational part duration : 63986
+
+
+Algorithm's computational part duration : 65445
+
+
+Algorithm's computational part duration : 63573
+
+
+Algorithm's computational part duration : 63562
+
+
+Algorithm's computational part duration : 63990
+
+
+Algorithm's computational part duration : 63921
+
+
+Algorithm's computational part duration : 63302
+
+
+Algorithm's computational part duration : 63538
+
+
+Algorithm's computational part duration : 63866
+
+
+Algorithm's computational part duration : 63838
+
+
+Algorithm's computational part duration : 63871

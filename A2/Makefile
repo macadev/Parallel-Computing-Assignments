@@ -34,7 +34,7 @@ sobel_pthreads.o: sobel_pthreads.c lodepng.h
 		gcc -c -pthread sobel_pthreads.c
 
 sobel_openmp.o: sobel_openmp.c lodepng.h
-		gcc -c sobel_openmp.c
+		gcc -c -fopenmp sobel_openmp.c
 
 lodepng.o: lodepng.c lodepng.h
 		gcc -c -fopenmp lodepng.c
