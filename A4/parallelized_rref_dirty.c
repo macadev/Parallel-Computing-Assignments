@@ -1,0 +1,591 @@
+#include <sys/time.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <mpi.h>
+#include "math.h"
+
+#define EPSILON 0.000001
+
+double ** allocate_matrix(int, int);
+double ** read_user_matrix_from_file(char*, int*, int*);
+double * read_user_matrix_from_file_and_store_linearly(char *filename, int *rows, int *columns);
+void input_clicking_probabilities(double **, int, int, double *);
+void write_clicking_probabilities_to_file(double *, int);
+void print_matrix(double **, int, int);
+void free_matrix(double **, int);
+int equals(double, double);
+void RREF(double **, int, int);
+void linear_matrix_RREF(double *matrix, int rows, int columns, int rank);
+void parallelized_RREF(double *linear_A, double* matrix_chunk, int rows, int columns, int rowsPerProcess, int rowsForLastProcess, int rank, int npes);
+void divide_by_max(double **, int, int);
+void linear_matrix_divide_by_max(double *matrix, int rows, int columns);
+void print_best_acceptance_threshold(double *, int);
+void print_linear_matrix(double *matrix, int rows, int columns);
+
+int main(int argc, char * argv[])
+{
+
+  int npes, rank;
+  int rows, columns, rowsPerProcess, rowsForLastProcess;
+  double **A;
+  double *cp;
+  MPI_Init(&argc, &argv);
+  MPI_Comm_size(MPI_COMM_WORLD, &npes);
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  //printf("I'm process %d out of %d\n", rank, npes);
+
+  double *linear_A;
+  double *matrix_chunk;
+  int data_for_parallelism[4];
+
+  if (rank == 0) {
+    /* setup */
+    if (argc != 2) printf("please provide a user matrix!");
+    
+    if (npes == 1) {
+      A = read_user_matrix_from_file(argv[1], &rows, &columns);
+    } else {
+      linear_A = read_user_matrix_from_file_and_store_linearly(argv[1], &rows, &columns);
+    }
+    cp = malloc(columns * sizeof(double)); // clicking probabilities
+
+    printf("Number of rows: %d\n", rows);
+    printf("Number of cols: %d\n", columns);
+    printf("Number of processes %d\n", npes);
+    rowsPerProcess = rows / npes;
+    rowsForLastProcess = rows - (npes * rowsPerProcess) + rowsPerProcess;
+    printf("Rows per process: %d\n", rowsPerProcess);
+    printf("Rows for last process %d\n", rowsForLastProcess);
+
+    // Communicate data obtained from reading the file to other processes
+    data_for_parallelism[0] = rows;
+    data_for_parallelism[1] = columns; 
+    data_for_parallelism[2] = rowsPerProcess;
+    data_for_parallelism[3] = rowsForLastProcess;
+    MPI_Bcast(data_for_parallelism, 4, MPI_INT, 0, MPI_COMM_WORLD);
+
+  } else {
+
+    // Receive data from root process about the file read
+    MPI_Bcast(data_for_parallelism, 4, MPI_INT, 0, MPI_COMM_WORLD);
+    rows = data_for_parallelism[0];
+    columns = data_for_parallelism[1]; 
+    rowsPerProcess = data_for_parallelism[2];
+    rowsForLastProcess = data_for_parallelism[3];
+  }
+
+  /* computation */
+
+  if (npes == 1) {
+    // Go for serial execution!
+    RREF(A, rows, columns);
+    print_matrix(A, rows, columns);
+  } else {
+    /* Parallel Execution */
+
+    int data_division[npes]; // Number of elements each process receives
+    int displacements[npes]; // Starting point of the data corresponding to each process
+    int i, mynum;
+
+    // Prepare arrays needed to scatter the matrix
+    for (i = 0; i < npes - 1; i++) {
+      data_division[i] = rowsPerProcess * columns;
+      displacements[i] = i * (columns * rowsPerProcess);
+    }
+    data_division[npes - 1] = rowsForLastProcess * columns;
+    displacements[i] = i * (columns * rowsPerProcess);
+
+    if (rank != (npes - 1)) {
+      // data for all processes except the last
+      matrix_chunk = malloc((rowsPerProcess * columns) * sizeof(double));
+    } else {
+      // data for last process - it might be larger than the rest
+      matrix_chunk = malloc((rowsForLastProcess * columns) * sizeof(double));
+    }
+
+    mynum = data_division[rank];
+    
+    // Scatter the user data among all process in blocks of rows
+    MPI_Scatterv(linear_A, data_division, displacements, MPI_DOUBLE, matrix_chunk, mynum, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+
+    // HUGE DEBUG BLOCK!
+    /*
+    if (rank == 2) {
+      printf("Rank 1 about to print chunk!\n");
+      printf("Data division\n");
+      for (i = 0; i < npes; i++) {
+        //printf("%lf ", matrix_chunk[i]);
+        printf("%d ", data_division[i]);
+      }
+      printf("\n");
+      for (i = 0; i < npes; i++) {
+        //printf("%lf ", matrix_chunk[i]);
+        printf("%d ", displacements[i]);
+      }
+      printf("\n");
+      print_linear_matrix(matrix_chunk, rowsForLastProcess, columns);
+      printf("\n");
+    }
+    */
+    
+    parallelized_RREF(linear_A, matrix_chunk, rows, columns, rowsPerProcess, rowsForLastProcess, rank, npes);
+  }
+
+  if (npes == 1) {
+    divide_by_max(A, rows, columns);
+    /* results */
+    input_clicking_probabilities(A, rows, columns, cp);
+    print_best_acceptance_threshold(cp, rows);
+    write_clicking_probabilities_to_file(cp, rows);
+    free_matrix(A, rows);
+    free(cp);
+  } else {
+    // TODO: calculate results in parallel
+    if (rank == 0) {
+
+    }
+
+
+  }
+
+  MPI_Finalize();
+  return 0;
+}
+
+void input_clicking_probabilities(double **matrix, int rows, int columns, double *cp) {
+  int row;
+  for (row = 0; row < rows; row++) {
+    cp[row] = matrix[row][columns-1];
+  }
+}
+
+void write_clicking_probabilities_to_file(double *cp, int rows) {
+  /* write clicking probabilities to file */ 
+  FILE *output_file;
+  int row;
+  output_file = fopen("clicking_probabilities.txt","w");
+  for (row = 0; row < rows; row++) {
+    fprintf(output_file, "%lf\n", cp[row]);
+  }
+
+  fclose(output_file);
+}
+
+void RREF(double **matrix, int rows, int columns) {
+  /* Gaussian elimination */
+  int src_row, dest_row, row, row2, column;
+  double pivot;
+  for (src_row = 0; src_row < rows; src_row++) {
+    for (dest_row = 0; dest_row < rows; dest_row++) {
+      if (dest_row == src_row) continue;
+
+      pivot = matrix[dest_row][src_row] / matrix[src_row][src_row];
+
+      // Update all the numbers in a row after reducing!
+      for (column = src_row; column < columns; column++) {
+        matrix[dest_row][column] = matrix[dest_row][column] - pivot*matrix[src_row][column];
+      }
+    }
+  }
+
+  /* Back-substitution */
+  for (row = rows-1; row >= 0; row--) {
+    // turn main diagonal elements into 1's, find results
+    matrix[row][columns-1] = matrix[row][columns-1] / matrix[row][row];
+    matrix[row][row] = 1;
+    for (row2 = row-1; row2 >= 0; row2--) {
+      matrix[row2][columns-1] += matrix[row2][row]*matrix[row][columns-1];
+      matrix[row2][row] = 0;
+    }
+  }
+}
+
+void linear_matrix_RREF(double *matrix, int rows, int columns, int rank) {
+  int src_row, dest_row, row, row2, column, i, j, k;
+  double temp[columns];
+  for (row = 0; row < rows; row++) {
+    for (j = rank * rows + row + 1; j < columns; j++) {
+      matrix[row*columns + j] = matrix[row*columns + j] / matrix[row*columns + rows*rank + row];
+    }
+    
+    matrix[row*columns + rank*rows + row] = 1;
+    
+    // send your row's calculated data
+    for (i = 0; i < columns; i++) {
+      temp[i] = matrix[row*columns + i];
+    }
+    
+    MPI_Bcast(temp, columns, MPI_DOUBLE, rank, MPI_COMM_WORLD);
+
+    // update lower rows
+    for (i = row + 1; i < rows; i++)
+    {
+      for (j = rank*rows + row + 1; j < columns; j++) {
+        matrix[i*columns + j] = matrix[i*columns + j] - matrix[i*columns + row + rank*rows] * temp[j];
+      }
+      matrix[i*columns + row + rank*rows] = 0;
+    }
+
+  }
+}
+
+void parallelized_RREF(double *linear_A, double* matrix_chunk, int rows, int columns, int rowsPerProcess, int rowsForLastProcess, 
+  int rank, int npes) {
+
+  int i, j, k, row, col, pivot;
+  double temp[columns];
+  double pivot_val;
+  MPI_Status status;
+
+  for (i = 0; i < rank * rowsPerProcess; i++) {
+    MPI_Bcast(temp, columns, MPI_DOUBLE, i/rowsPerProcess, MPI_COMM_WORLD);
+
+    for (j = 0; j < columns; j++) {
+      if (temp[j] == 1) {
+        pivot = j;
+        break;
+      }
+    }
+    
+    for (row = 0; row < rowsPerProcess; row++) {
+
+      pivot_val = matrix_chunk[row*columns + pivot];
+
+      for (col = 0; col < columns; col++) {
+        matrix_chunk[row*columns + col] = matrix_chunk[row*columns + col] - pivot_val*temp[col];
+      }
+    }
+  }
+
+  // All rows updated with data from rows above
+  // Begin calculation of the RREF for the current matrix chunk
+  
+  if (rank < npes - 1) {
+    linear_matrix_RREF(matrix_chunk, rowsPerProcess, columns, rank);
+  } else {
+    linear_matrix_RREF(matrix_chunk, rowsForLastProcess, columns, rank);
+  }
+
+  if (rank == 0) {
+    MPI_Gather(matrix_chunk, columns*rowsPerProcess, MPI_DOUBLE, linear_A, columns*rowsPerProcess, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+  } else if (rank == npes - 1) {
+    MPI_Gather(matrix_chunk, columns*rowsForLastProcess, MPI_DOUBLE, NULL, columns*rowsForLastProcess, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+  } else {
+    MPI_Gather(matrix_chunk, columns*rowsPerProcess, MPI_DOUBLE, NULL, columns*rowsPerProcess, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+  }
+
+  if (rank == 0) {
+    printf("Row Reduced Matrix\n");
+    print_linear_matrix(linear_A, rows, columns);
+  }
+
+  MPI_Barrier(MPI_COMM_WORLD);
+
+  /* Reduce each individual matrix chunk in parallel */
+
+  int target_row;
+  double reduction_val;
+  for (row = rowsPerProcess - 1; row > 0; row--) {
+
+    for (j = 0; j < columns; j++) {
+      if (matrix_chunk[row*columns + j] == 1) {
+        pivot = j; break;
+      }
+    }
+
+    for (target_row = row - 1; target_row >= 0; target_row--) {
+      for (col = 0; col < columns; col++) {
+        if (col == pivot) continue;
+        //reduction_val = matrix_chunk[row*columns + col];
+        //printf("%lf\n", reduction_val);
+        //double val = matrix_chunk[target_row*columns + col] - matrix_chunk[target_row*columns + pivot]*matrix_chunk[row*columns + col];
+        printf("%lf - %lf * %lf\n", matrix_chunk[target_row*columns + col], matrix_chunk[target_row*columns + pivot], matrix_chunk[row*columns + col]);
+        matrix_chunk[target_row*columns + col] = matrix_chunk[target_row*columns + col] - matrix_chunk[target_row*columns + pivot]*matrix_chunk[row*columns + col];
+      }
+      matrix_chunk[target_row*columns + pivot] = 0;
+    }
+  }
+
+  // printf("doing this ZZZZ\n");
+  // if (rank == 0) {
+  //   printf("After reduc!\n");
+  //   for (i = 0; i < rowsPerProcess; i++) {
+  //     for (j = 0; j < columns; j++) {
+  //       printf("%lf ", matrix_chunk[i*columns + j]);
+  //     }
+  //     printf("\n");
+  //   }
+  // }
+
+  if (rank == 0) {
+    MPI_Gather(matrix_chunk, columns*rowsPerProcess, MPI_DOUBLE, linear_A, columns*rowsPerProcess, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+  } else if (rank == npes - 1) {
+    MPI_Gather(matrix_chunk, columns*rowsForLastProcess, MPI_DOUBLE, NULL, columns*rowsForLastProcess, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+  } else {
+    MPI_Gather(matrix_chunk, columns*rowsPerProcess, MPI_DOUBLE, NULL, columns*rowsPerProcess, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+  }
+
+  if (rank == 0) {
+    printf("Row Reduced Matrix\n");
+    print_linear_matrix(linear_A, rows, columns);
+  }
+
+  /* Reduce upper triangle */
+
+  int ranks_to_receive_from;
+  for (ranks_to_receive_from = npes - rank - 1; ranks_to_receive_from > 0; ranks_to_receive_from--) {
+    // Receive
+    int current_sender_rank = ranks_to_receive_from + rank;
+
+    for (i = 0; i < rowsPerProcess; i++) {
+      MPI_Recv(temp, columns, MPI_DOUBLE, current_sender_rank, 7, MPI_COMM_WORLD, &status);
+      //printf("I'm %d and I received from %d\n", rank, current_sender_rank);
+
+      //TODO: get pivot in a better way
+      //printf("See it here\n");
+      // for (j = 0; j < columns; j++) {
+      //   printf("%lf ", temp[j]);
+      // }
+      // printf("\n");
+      // printf("%lf", temp[6]);
+      // printf("\n");
+
+      for (j = 0; j < columns; j++) {
+        if (temp[j] == 1) {
+          pivot = j; break;
+        }
+      }
+
+      // if (rank == 0) {
+      //   printf("Original\n");
+      //   for (row = 0; row < rowsPerProcess; row++) {
+      //     for (col = 0; col < columns; col++) {
+      //       printf(" %lf", matrix_chunk[row*columns + col]);
+      //     }
+      //     printf("\n");
+      //   }
+      //   printf("\n");
+      // }
+
+      // reduce matrix_chunk with the received row
+      for (row = 0; row < rowsPerProcess; row++) {
+        for (col = 0; col < columns; col++) {
+          if (col == pivot) continue;
+          // printf("A) %lf\n", matrix_chunk[row*columns + col]);
+          // printf("B) %lf\n", matrix_chunk[row*columns + pivot]);
+          // printf("C) %lf\n", temp[col]);
+          // printf("\n");
+          matrix_chunk[row*columns + col] = matrix_chunk[row*columns + col] - matrix_chunk[row*columns + pivot]*temp[col];
+        }
+        matrix_chunk[row*columns + pivot] = 0;
+      }
+
+      if (rank == 0) {
+        printf("After\n");
+        for (row = 0; row < rowsPerProcess; row++) {
+          for (col = 0; col < columns; col++) {
+            printf(" %lf", matrix_chunk[row*columns + col]);
+          }
+          printf("\n");
+        }
+        printf("\n");
+      }
+
+    }
+
+    // if (rank == 0) {
+    //   for (k = 0; k < columns; k++) {
+    //     printf("%lf ", temp[k]);
+    //   }
+    //   printf("\n");
+    // }
+  }
+
+  int destination_rank;
+  if (rank != 0) {
+    for (row = rowsPerProcess - 1; row >= 0; row--) {
+      for (j = 0; j < columns; j++) {
+        temp[j] = matrix_chunk[row*columns + j];
+      }
+      for (destination_rank = rank - 1; destination_rank >= 0; destination_rank--) {
+        MPI_Send(temp, columns, MPI_DOUBLE, destination_rank, 7, MPI_COMM_WORLD);
+      }
+    }
+  }
+
+  MPI_Barrier(MPI_COMM_WORLD);
+
+  /* Finish Processing */
+  
+  if (rank == 0) {
+    MPI_Gather(matrix_chunk, columns*rowsPerProcess, MPI_DOUBLE, linear_A, columns*rowsPerProcess, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+  } else if (rank == npes - 1) {
+    MPI_Gather(matrix_chunk, columns*rowsForLastProcess, MPI_DOUBLE, NULL, columns*rowsForLastProcess, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+  } else {
+    MPI_Gather(matrix_chunk, columns*rowsPerProcess, MPI_DOUBLE, NULL, columns*rowsPerProcess, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+  }
+
+  printf("\n\n");
+  if (rank == 0) {
+    printf("Row Reduced Matrix\n");
+    print_linear_matrix(linear_A, rows, columns);
+  }
+
+}
+
+void linear_matrix_divide_by_max(double *matrix, int rows, int columns) {
+
+}
+
+void print_RREF(double **matrix, int rows, int columns) {
+  int row, col;
+  for (row = 0; row < rows; row++) {
+    for (col = 0; col < columns; col++) {
+      printf("%f ", matrix[row][col]);
+    }
+    printf("\n");
+  }
+}
+
+void divide_by_max(double **matrix, int rows, int columns) {
+  double max = 0;
+  int row, column;
+
+  /* get max so we can divide by this later to get probabilities */
+  for (row = 0; row < rows; row++) {    
+    if (max < fabs(matrix[row][columns-1])) max = fabs(matrix[row][columns-1]);
+  }
+
+  /* divide by max and take abs */
+  for (row = 0; row < rows; row++) {
+    /* check for division by zero */
+    if (equals(max,0)) {
+      matrix[row][columns-1] = 0;
+    } else {
+      matrix[row][columns-1] = fabs (matrix[row][columns-1]) / max;
+    }
+  }
+}
+
+int equals(double a, double b) {
+  if (fabs(a-b) < EPSILON) return 1;
+  else return 0;
+}
+
+void print_matrix(double **matrix, int rows, int columns) 
+{
+  int row, column;
+  for (row = 0; row < rows; row++) {
+    for (column = 0; column < columns; column++) {
+      printf("%lf ",matrix[row][column]);
+    }
+    printf("\n");
+  } 
+}
+
+double ** allocate_matrix(int rows, int cols)
+{
+  int i = 0;
+  double ** matrix = (double **) malloc(rows * sizeof(double *));
+
+  for (i = 0; i < rows; i++) {
+    matrix[i] = (double *) malloc(cols * sizeof(double));
+  }
+
+  return matrix;
+}
+
+double ** read_user_matrix_from_file(char *filename, int *rows, int *columns) {
+  FILE *file;
+  file = fopen(filename, "r");
+
+  /* get number of rows and columns*/
+  *rows = 1;
+  *columns = 1;
+  char c;
+  int columns_known = 0;
+  while(!feof(file)) {
+    c = fgetc(file);
+    if (c == ' ') {
+      if (!columns_known) (*columns)++;
+    } 
+
+    if (c == '\n') {
+      (*rows)++;
+      columns_known = 1;
+      continue;
+    }
+  }
+
+  /* read values into array */
+  rewind(file);
+  int i, j;
+  double **matrix = allocate_matrix(*rows, *columns);
+  for (i = 0; i < *rows; i++) {
+    for (j = 0; j < *columns; j++) {
+      fscanf(file,"%lf",&matrix[i][j]);
+    }
+  } 
+  fclose(file);
+
+  return matrix;
+}
+
+double * read_user_matrix_from_file_and_store_linearly(char *filename, int *rows, int *columns) {
+  FILE *file;
+  file = fopen(filename, "r");
+
+  /* get number of rows and columns*/
+  *rows = 1;
+  *columns = 1;
+  char c;
+  int columns_known = 0;
+  while(!feof(file)) {
+    c = fgetc(file);
+    if (c == ' ') {
+      if (!columns_known) (*columns)++;
+    } 
+
+    if (c == '\n') {
+      (*rows)++;
+      columns_known = 1;
+      continue;
+    }
+  }
+
+  /* read values into array */
+  rewind(file);
+  int i;
+  double * matrix = (double *) malloc((*rows) * (*columns) * sizeof(double *));
+  for (i = 0; i < (*rows)*(*columns); i++) {
+    fscanf(file,"%lf",&matrix[i]);
+  } 
+  fclose(file);
+
+  return matrix;
+}
+
+void print_linear_matrix(double *matrix, int rows, int columns) {
+  int col_counter = 0;
+  int i;
+  for (i = 0; i < rows*columns; i++) {
+    printf("%lf ", matrix[i]);
+    col_counter++;
+    if ( col_counter == columns) {
+      printf("\n");
+      col_counter = 0;
+    }
+  }
+}
+
+void free_matrix(double ** matrix, int rows)
+{
+  int i;
+  for (i = 0; i < rows; i++) free(matrix[i]);
+  free(matrix);
+}
+
+void print_best_acceptance_threshold(double *cp, int rows) {
+/* TODO! (you didn't think this would ALL be handed to you, did you?) */
+}
