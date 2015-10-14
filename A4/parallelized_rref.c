@@ -7,6 +7,21 @@
 
 #define EPSILON 0.000001
 
+
+/*
+______               _ _      _ _             _  ____________ ___________ 
+| ___ \             | | |    | (_)           | | | ___ \ ___ \  ___|  ___|
+| |_/ /_ _ _ __ __ _| | | ___| |_ _______  __| | | |_/ / |_/ / |__ | |_   
+|  __/ _` | '__/ _` | | |/ _ \ | |_  / _ \/ _` | |    /|    /|  __||  _|  
+| | | (_| | | | (_| | | |  __/ | |/ /  __/ (_| | | |\ \| |\ \| |___| |    
+\_|  \__,_|_|  \__,_|_|_|\___|_|_/___\___|\__,_| \_| \_\_| \_\____/\_|    
+                                                                          
+Daniel Macario. 
+ID: 260503662
+*/
+
+
+int equals(double, double);
 double ** allocate_matrix(int, int);
 double ** read_user_matrix_from_file(char*, int*, int*);
 double * read_user_matrix_from_file_and_store_linearly(char *filename, int *rows, int *columns);
@@ -15,7 +30,6 @@ void write_clicking_probabilities_to_file(double *, int);
 void linear_matrix_write_clicking_probabilities_to_file(double *cp, int rows, int cols);
 void print_matrix(double **, int, int);
 void free_matrix(double **, int);
-int equals(double, double);
 void RREF(double **, int, int);
 void linear_matrix_RREF(double *matrix, int rows, int columns, int rank, int rowsPerProcess);
 void parallelized_RREF(double *linear_A, double* matrix_chunk, int rows, int columns, int rowsPerProcess, int rowsForLastProcess, int rank, int npes, int *data_division, int *displacements);
@@ -23,6 +37,7 @@ void divide_by_max(double **, int, int);
 void print_best_acceptance_threshold(double *, int);
 void print_linear_matrix(double *matrix, int rows, int columns);
 void find_and_divide_by_max_element(double *matrix, int rank, int npes, int rows, int columns);
+void print_best_profit_threshold(double *matrix_chunk, int rows, int columns, int rank);
 
 int main(int argc, char * argv[])
 {
@@ -276,6 +291,7 @@ void parallelized_RREF(double *linear_A, double* matrix_chunk, int rows, int col
   /* Finish Processing */
   
   find_and_divide_by_max_element(matrix_chunk, rank, npes, correct_rows_value, columns);
+  print_best_profit_threshold(matrix_chunk, correct_rows_value, columns, rank);
 
   if (rank == 0) {
     MPI_Gatherv(matrix_chunk, columns*rowsPerProcess, MPI_DOUBLE, linear_A, data_division, displacements, MPI_DOUBLE, 0, MPI_COMM_WORLD);
@@ -289,6 +305,40 @@ void parallelized_RREF(double *linear_A, double* matrix_chunk, int rows, int col
   //   printf("Divided\n");
   //   print_linear_matrix(linear_A, rows, columns);
   // }
+}
+
+void print_best_profit_threshold(double *matrix_chunk, int rows, int columns, int rank) {
+  double thresholds[] = {0.2, 0.4, 0.6, 0.8, 1.0};
+  int last_col_index, i, row;
+  double best_threshold, local_profit, global_profit, best_profit, probability;
+  
+  last_col_index = columns - 1;
+  for (i = 0; i < 5; i++) {
+    local_profit = 0;
+    global_profit = 0;
+    for (row = 0; row < rows; row++) {
+      probability = matrix_chunk[row*columns + last_col_index];
+      if (probability >= thresholds[i]) {
+        local_profit += (1.0 * probability - 2.0 * (1 - probability));
+      }
+    }
+
+    MPI_Reduce(&local_profit, &global_profit, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    
+    if (rank == 0) {
+      if (i == 0) {
+        best_profit = global_profit;
+        best_threshold = thresholds[i];
+      } else if (global_profit > best_profit) {
+        best_profit = global_profit;
+        best_threshold = thresholds[i];
+      }
+    }
+  }
+
+  if (rank == 0) {
+    printf("Best profit %lf given by Treshold %lf\n", best_profit, best_threshold);
+  }
 }
 
 void find_and_divide_by_max_element(double *matrix, int rank, int npes, int rows, int columns) {
