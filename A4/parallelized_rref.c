@@ -301,10 +301,10 @@ void parallelized_RREF(double *linear_A, double* matrix_chunk, int rows, int col
     MPI_Gatherv(matrix_chunk, columns*rowsPerProcess, MPI_DOUBLE, NULL, data_division, displacements, MPI_DOUBLE, 0, MPI_COMM_WORLD);
   }
 
-  // if (rank == 0) {
-  //   printf("Divided\n");
-  //   print_linear_matrix(linear_A, rows, columns);
-  // }
+  if (rank == 0) {
+    printf("Divided\n");
+    print_linear_matrix(linear_A, rows, columns);
+  }
 }
 
 void print_best_profit_threshold(double *matrix_chunk, int rows, int columns, int rank) {
